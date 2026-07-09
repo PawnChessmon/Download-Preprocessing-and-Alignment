@@ -117,6 +117,6 @@ done
 # STEP 4: Aggregate Quality Reports
 # -----------------------------------------------------------------------------
 echo "Running MultiQC to aggregate all reports..."
-multiqc "$DIR_FASTQC" "$DIR_FASTP" "$DIR_ALIGN" -o "Lao_MultiQC_Report"
+multiqc "$DIR_FASTQC" "$DIR_FASTP" "$DIR_ALIGN" -o "MultiQC_Report"
 
 echo "Pipeline complete: $(date)"

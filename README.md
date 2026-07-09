@@ -1,4 +1,4 @@
-# Opisthorchis viverrini WGS Processing Pipeline
+# *Opisthorchis viverrini* WGS Processing Pipeline
 
 ## Overview
 This repository contains the accession lists and automated HPC master scripts used to download, preprocess, and align *Opisthorchis viverrini* whole-genome sequencing (WGS) data. 

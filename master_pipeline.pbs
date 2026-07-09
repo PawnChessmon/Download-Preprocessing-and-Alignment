@@ -1,6 +1,6 @@
 #!/bin/bash
 ##PBS -P CFP04-CF-052
-#PBS -N Lao_Master_Pipeline
+#PBS -N Master_Pipeline
 #PBS -l select=1:ncpus=8:mem=55gb
 #PBS -l walltime=96:00:00
 #PBS -j oe

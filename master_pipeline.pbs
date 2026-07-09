@@ -4,7 +4,7 @@
 #PBS -l select=1:ncpus=8:mem=55gb
 #PBS -l walltime=96:00:00
 #PBS -j oe
-#PBS -o Lao_master_pipeline.log
+#PBS -o master_pipeline.log
 
 # Strict mode: If any step fails, the script immediately stops. 
 # This prevents it from accidentally deleting files if an alignment crashes.
@@ -24,11 +24,11 @@ conda activate fluke_qc
 FILEREPORT="filereport_read_run_ERP134887.tsv"
 REF="ncbi_dataset/data/GCA_964213165.1/GCA_964213165.1_htOpiVive1.1_genomic.fna"
 
-# Setup Lao_ prefixed directories
-DIR_RAW="Lao_Genomes_32"
-DIR_FASTQC="Lao_qc_raw_fastqc"
-DIR_FASTP="Lao_fastp_reads"
-DIR_ALIGN="Lao_alignment"
+# Setup directories
+DIR_RAW="Genomes_32"
+DIR_FASTQC="qc_raw_fastqc"
+DIR_FASTP="fastp_reads"
+DIR_ALIGN="alignment"
 
 mkdir -p "$DIR_RAW" "$DIR_FASTQC" "$DIR_FASTP" "$DIR_ALIGN"
 
@@ -117,6 +117,6 @@ done
 # STEP 4: Aggregate Quality Reports
 # -----------------------------------------------------------------------------
 echo "Running MultiQC to aggregate all reports..."
-multiqc "$DIR_FASTQC" "$DIR_FASTP" "$DIR_ALIGN" -o "Lao_MultiQC_Report"
+multiqc "$DIR_FASTQC" "$DIR_FASTP" "$DIR_ALIGN" -o "MultiQC_Report"
 
 echo "Pipeline complete: $(date)"

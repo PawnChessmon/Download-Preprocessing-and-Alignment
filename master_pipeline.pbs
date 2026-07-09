@@ -25,7 +25,7 @@ FILEREPORT="filereport_read_run_ERP134887.tsv"
 REF="ncbi_dataset/data/GCA_964213165.1/GCA_964213165.1_htOpiVive1.1_genomic.fna"
 
 # Setup directories
-DIR_RAW="Genomes_32"
+DIR_RAW="Genomes"
 DIR_FASTQC="qc_raw_fastqc"
 DIR_FASTP="fastp_reads"
 DIR_ALIGN="alignment"

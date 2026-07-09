@@ -21,12 +21,34 @@ The `accessions/` directory contains the SRA run accessions for **37 total sampl
 ### 2. Long-Read Reference Data (PacBio)
 * **Reference Strain (`ref_accession.tsv`):** 1 PacBio long-read sample. This is the raw sequence data originally used to assemble the reference genome (`GCA_964213165.1`) utilized in this pipeline's alignment step.
 
-## Usage
-Both scripts require a conda/mamba environment with the necessary bioinformatics tools installed. 
+## Prerequisites & Dependencies
 
-1. Clone this repository.
-2. Build the environment: `conda create -n fluke_qc -c bioconda sra-tools fastqc fastp minimap2 samtools multiqc`
-3. Edit the `FILEREPORT` variable in the script to point to your desired `.tsv` accession list.
-4. Submit the job to your respective cluster:
-   * **PBS:** `qsub master_pipeline.pbs`
-   * **Slurm:** `sbatch master_pipeline_slurm.sh`
+This pipeline requires a Unix-based High-Performance Computing (HPC) environment equipped with a job scheduler (PBS/Torque or Slurm) and a Conda-based environment manager (Miniforge, Miniconda, or Anaconda).
+
+### 1. Bioinformatics Tools
+All core processing tools are available through the `bioconda` channel. The script assumes these are installed in a dedicated environment (e.g., `fluke_qc`).
+
+* **SRA-Tools** (`sra-tools`): Required for downloading and extracting raw sequence data (`prefetch`, `fasterq-dump`).
+* **FastQC** (`fastqc`): Required for raw read quality assessment.
+* **fastp** (`fastp`): Required for adapter trimming and quality filtering.
+* **Minimap2** (`minimap2`): Required for indexing the reference genome and aligning short reads.
+* **SAMtools** (`samtools`): Required for BAM sorting, indexing, and alignment metric generation (`flagstat`).
+* **MultiQC** (`multiqc`): Required to aggregate all individual QC and alignment logs into a single HTML report.
+
+**Quick Install Command:**
+```bash
+conda create -n fluke_qc -c conda-forge -c bioconda sra-tools fastqc fastp minimap2 samtools multiqc -y
+```
+
+
+### 2. Required Input Files
+The script operates in strict mode (`set -euo pipefail`) and will abort if the following input files are not present in the working directory prior to execution:
+
+* **Accession List (`.tsv`):** A tab-separated values file containing the SRA run accessions. The script parses the first column and ignores the header row. (Update the `FILEREPORT` variable in the script to match your filename).
+* **Reference Genome (`.fna` / `.fasta`):** An uncompressed reference genome file. The script will automatically build the `.mmi` index during its first run. (Update the `REF` variable in the script to point to this file path).
+
+### 3. System Utilities
+The pipeline relies on standard GNU core utilities typically pre-installed on Linux/Unix systems:
+* `awk` (for TSV parsing)
+* `gzip` (for storage-efficient compression)
+* `wget` / `curl` (optional, for fetching reference datasets)

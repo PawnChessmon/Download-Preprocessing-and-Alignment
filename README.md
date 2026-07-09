@@ -6,8 +6,8 @@ This repository contains the accession lists and automated HPC master scripts us
 The pipeline is explicitly designed for high-performance computing (HPC) environments with strict storage quotas (e.g., <500 GB scratch limits). It utilizes a sequential, "self-cleaning" architecture that fully processes one isolate from raw SRA download through to a sorted BAM file, immediately deleting massive intermediate raw files (`.fastq.gz`) before initiating the next sample.
 
 ## Scripts Provided
-* **`Lao_master_pipeline.pbs`**: Master pipeline configured for PBS job schedulers.
-* **`Lao_master_pipeline_slurm_edition.sh`**: Master pipeline configured for Slurm workload managers.
+* **`master_pipeline.pbs`**: Master pipeline configured for PBS job schedulers.
+* **`master_pipeline_slurm_edition.sh`**: Master pipeline configured for Slurm workload managers.
 
 **Pipeline Tools Integrated:** `sra-tools` (prefetch/fasterq-dump) -> `fastqc` -> `fastp` (trimming) -> `minimap2` (alignment) -> `samtools` (sort/index).
 
@@ -28,5 +28,5 @@ Both scripts require a conda/mamba environment with the necessary bioinformatics
 2. Build the environment: `conda create -n fluke_qc -c bioconda sra-tools fastqc fastp minimap2 samtools multiqc`
 3. Edit the `FILEREPORT` variable in the script to point to your desired `.tsv` accession list.
 4. Submit the job to your respective cluster:
-   * **PBS:** `qsub Lao_master_pipeline.pbs`
-   * **Slurm:** `sbatch Lao_master_pipeline_slurm.sh`
+   * **PBS:** `qsub master_pipeline.pbs`
+   * **Slurm:** `sbatch master_pipeline_slurm.sh`

@@ -7,7 +7,7 @@ The pipeline is explicitly designed for high-performance computing (HPC) environ
 
 ## Scripts Provided
 * **`Lao_master_pipeline.pbs`**: Master pipeline configured for PBS job schedulers.
-* **`Lao_master_pipeline_slurm.sh`**: Master pipeline configured for Slurm workload managers.
+* **`Lao_master_pipeline_slurm_edition.sh`**: Master pipeline configured for Slurm workload managers.
 
 **Pipeline Tools Integrated:** `sra-tools` (prefetch/fasterq-dump) -> `fastqc` -> `fastp` (trimming) -> `minimap2` (alignment) -> `samtools` (sort/index).
 

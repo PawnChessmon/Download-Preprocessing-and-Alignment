@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=Lao_Master_Pipeline
+#SBATCH --job-name=Master_Pipeline
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=55G
 #SBATCH --time=96:00:00
-#SBATCH --output=Lao_master_pipeline.log
-#SBATCH --error=Lao_master_pipeline.err
+#SBATCH --output=master_pipeline.log
+#SBATCH --error=master_pipeline.err
 
 # Strict mode: If any step fails, the script immediately stops.
 set -euo pipefail
@@ -24,11 +24,11 @@ conda activate fluke_qc
 FILEREPORT="filereport_read_run_ERP134887.tsv"
 REF="ncbi_dataset/data/GCA_964213165.1/GCA_964213165.1_htOpiVive1.1_genomic.fna"
 
-# Setup Lao_ prefixed directories
-DIR_RAW="Lao_Genomes_32"
-DIR_FASTQC="Lao_qc_raw_fastqc"
-DIR_FASTP="Lao_fastp_reads"
-DIR_ALIGN="Lao_alignment"
+# Setup directories
+DIR_RAW="Genomes"
+DIR_FASTQC="qc_raw_fastqc"
+DIR_FASTP="fastp_reads"
+DIR_ALIGN="alignment"
 
 mkdir -p "$DIR_RAW" "$DIR_FASTQC" "$DIR_FASTP" "$DIR_ALIGN"
 
